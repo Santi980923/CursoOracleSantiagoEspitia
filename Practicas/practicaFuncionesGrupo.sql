@@ -1,0 +1,53 @@
+--1)
+SELECT COUNT(*) FROM employees
+WHERE department_id = 50;
+
+--2)
+SELECT COUNT(*) FROM employees
+WHERE hire_date BETWEEN '01-01-2007' AND '31-12-2007';
+
+--3)
+
+SELECT MAX(SALARY) AS "Sueldo maximo", MIN(SALARY) AS "Sueldo Minimo",
+MAX(SALARY) - MIN(SALARY) AS  "Diferencia Sueldos"
+FROM employees;
+
+--4)
+
+SELECT department_id ,SUM(SALARY) AS "SUMA DEP 100" 
+FROM employees
+HAVING department_id = 100
+GROUP BY department_id;
+
+-- 5)
+SELECT department_id, ROUND(AVG(SALARY),2) AS "Salario Promedio"
+FROM employees
+GROUP BY department_id;
+
+--6)
+SELECT COUNTRY_ID, COUNT(*) FROM LOCATIONS GROUP BY COUNTRY_ID;
+
+--7)
+SELECT department_id, ROUND(AVG(SALARY),2) AS "Salario Promedio"
+FROM employees
+WHERE commission_pct IS NOT NULL
+GROUP BY department_id;
+
+--8)
+SELECT TO_CHAR(HIRE_DATE,'YYYY'), COUNT (*)
+FROM EMPLOYEES
+GROUP BY TO_CHAR(HIRE_DATE,'YYYY')
+HAVING COUNT(*) >10;
+
+-- 9) 
+SELECT DEPARTMENT_ID, TO_CHAR(HIRE_DATE,'YYYY'), COUNT(EMPLOYEE_ID)
+FROM EMPLOYEES
+GROUP BY DEPARTMENT_ID, TO_CHAR(HIRE_DATE, 'YYYY')
+ORDER BY DEPARTMENT_ID;
+
+-- 10)
+
+SELECT DISTINCT DEPARTMENT_ID
+FROM EMPLOYEES
+GROUP BY DEPARTMENT_ID, MANAGER_ID
+HAVING COUNT(EMPLOYEE_ID) > 5;
